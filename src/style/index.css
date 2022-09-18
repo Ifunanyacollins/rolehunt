@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer base {
+  button,  [type='submit'] {
+    background:
+   
+}
+}
+#root {
+    height: 100%;
+    width: 100%;
+  }
+
+body {
+    font-family: ibm-plex-mono, sans-serif;
+    color: #000000;
+  }
+
+
+  h1, h2, h3,h4,h5,h6 {
+    font-family: 'Open Sans', sans-serif;
+  }
+
+ 

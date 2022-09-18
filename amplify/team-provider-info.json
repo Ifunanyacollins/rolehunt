@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-flagpin-dev-144126-authRole",
+      "UnauthRoleArn": "arn:aws:iam::669721813020:role/amplify-flagpin-dev-144126-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::669721813020:role/amplify-flagpin-dev-144126-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-flagpin-dev-144126-deployment",
+      "UnauthRoleName": "amplify-flagpin-dev-144126-unauthRole",
+      "StackName": "amplify-flagpin-dev-144126",
+      "StackId": "arn:aws:cloudformation:us-east-1:669721813020:stack/amplify-flagpin-dev-144126/9ac09c30-3757-11ed-8d96-0e52e78ae9ed",
+      "AmplifyAppId": "d2928w9cu72ipf"
+    }
+  }
+}
