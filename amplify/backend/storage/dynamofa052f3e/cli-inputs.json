@@ -1,0 +1,14 @@
+{
+  "resourceName": "dynamofa052f3e",
+  "tableName": "applications",
+  "partitionKey": {
+    "fieldName": "status",
+    "fieldType": "string"
+  },
+  "sortKey": {
+    "fieldName": "channel",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

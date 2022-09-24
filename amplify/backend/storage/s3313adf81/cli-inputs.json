@@ -1,0 +1,16 @@
+{
+  "resourceName": "s3313adf81",
+  "policyUUID": "313adf81",
+  "bucketName": "flagpin0089320b86534f089f2572032ba90e3a",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

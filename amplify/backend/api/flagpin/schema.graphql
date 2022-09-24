@@ -1,0 +1,23 @@
+type Application @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  company: String!
+  status: ApplicationStatus!
+  role: String
+  channel: String
+  createdAt: AWSDateTime
+}
+
+enum ApplicationStatus {
+  IN_REVIEW
+  REJECTED
+  INTERVIEW
+  WITHDREW
+}
+
+type Project @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  name: String!
+  url: String
+  description: String
+  poster: String
+}

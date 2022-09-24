@@ -1,13 +1,37 @@
-import { Row, Col, Button, Checkbox, Form, Input } from "antd";
-import React from "react";
+import { Row, Col, Button, Checkbox, Form, Input, Alert } from "antd";
+import { Auth } from "aws-amplify";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+type valuesParams = {
+  password: string;
+  username: string;
+};
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message;
+  return String(error);
+}
 
 const Login = () => {
   let navigate = useNavigate();
-
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
-    navigate(`/`);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const onFinish = async (values: valuesParams) => {
+    try {
+      setError(null);
+      setLoading(true);
+      const user = await Auth.signIn(values.username, values.password);
+      setLoading(false);
+      navigate(`/`);
+    } catch (error) {
+      if (getErrorMessage(error).includes("User is not confirmed")) {
+        navigate(`/auth/confirm`);
+      }
+      setError(null);
+      setLoading(false);
+      setError(getErrorMessage(error));
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -19,21 +43,19 @@ const Login = () => {
       <Col
         md={10}
         lg={10}
-        className="flex bg-no-repeat bg-cover h-screen"
-        style={{
-          backgroundImage:
-            "url(https://images.pexels.com/photos/6446708/pexels-photo-6446708.jpeg)",
-        }}
+        className="flex bg-no-repeat bg-cover h-screen authBG overflow-hidden"
       ></Col>
 
       <Col md={14} lg={14} className="flex justify-center">
         <div className="w-full md:w-3/4 md:p-10 p-4">
-          <div className="mt-6">HMarket</div>
+          <div className="mt-6">Track</div>
           <div className="mt-20">
             <div className={"mb-10"}>
               <h2 className="text-bold text-3xl">Log In</h2>
               <span>we are glad you’re here again.</span>
             </div>
+
+            {error && <Alert type="error" message={error} />}
             <Form
               name="basic"
               initialValues={{
@@ -42,19 +64,18 @@ const Login = () => {
               layout="vertical"
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
-              autoComplete="off"
             >
               <Form.Item
                 label="Email Address"
-                name="email"
+                name="username"
                 rules={[
                   {
                     required: true,
-                    message: "Please input your email!",
+                    message: "Please input your username!",
                   },
                 ]}
               >
-                <Input size="large" />
+                <Input size="large" type="email" />
               </Form.Item>
 
               <Form.Item
@@ -95,25 +116,17 @@ const Login = () => {
                   span: 24,
                 }}
               >
-                <Button block type="primary" size="large">
+                <Button
+                  loading={loading}
+                  htmlType="submit"
+                  block
+                  type="primary"
+                  size="large"
+                >
                   Login
                 </Button>
               </Form.Item>
             </Form>
-
-            <Row gutter={[16, 16]}>
-              <Col md={12}>
-                <Button block type="ghost" size="large">
-                  Log in with Google
-                </Button>
-              </Col>
-
-              <Col md={12}>
-                <Button block type="ghost" size="large">
-                  Log in with Apple
-                </Button>
-              </Col>
-            </Row>
 
             <Col md={24} lg={24} className="mt-4">
               Not a member?
