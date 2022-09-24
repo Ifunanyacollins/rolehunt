@@ -15,7 +15,7 @@ const menu = (
   />
 );
 
-function Header() {
+function Header({ user }: { user: any }) {
   let location = useLocation();
   return (
     <div className="flex-shrink-0 h-20 flex justify-between items-center px-10">

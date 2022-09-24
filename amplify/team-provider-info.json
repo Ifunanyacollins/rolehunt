@@ -9,7 +9,19 @@
       "UnauthRoleName": "amplify-flagpin-dev-144126-unauthRole",
       "StackName": "amplify-flagpin-dev-144126",
       "StackId": "arn:aws:cloudformation:us-east-1:669721813020:stack/amplify-flagpin-dev-144126/9ac09c30-3757-11ed-8d96-0e52e78ae9ed",
-      "AmplifyAppId": "d2928w9cu72ipf"
+      "AmplifyAppId": "d2928w9cu72ipf",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-flagpin-dev-144126-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "auth": {
+        "undefined": {}
+      },
+      "function": {
+        "flagpin1e630e67": {
+          "deploymentBucketName": "amplify-flagpin-dev-144126-deployment",
+          "s3Key": "amplify-builds/flagpin1e630e67-433847744e767a6f4b50-build.zip"
+        }
+      }
     }
   }
 }

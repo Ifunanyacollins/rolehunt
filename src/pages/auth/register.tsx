@@ -5,28 +5,51 @@ import {
   Checkbox,
   Form,
   Input,
-  Radio,
   RadioChangeEvent,
+  Alert,
 } from "antd";
-import React, { useState } from "react";
+import { Auth } from "aws-amplify";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+type values = {
+  firstName: string;
+  lastName: string;
+  password: string;
+  email: string;
+};
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message;
+  return String(error);
+}
 
 const Register = () => {
   let navigate = useNavigate();
-  const [value, setValue] = useState(0);
-
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
-    navigate(`/`);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
-
-  const onChange = (e: RadioChangeEvent) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const onFinish = async (values: values) => {
+    try {
+      setLoading(true);
+      setError(null);
+      await Auth.signUp({
+        username: values.email,
+        password: values.password,
+        attributes: {
+          email: values.email,
+          "custom:firstName": values.firstName,
+          "custom:lastName": values.lastName,
+        },
+        autoSignIn: {
+          enabled: true,
+        },
+      });
+      setLoading(false);
+      navigate(`/auth/confirm?email=${values.email}`);
+    } catch (error) {
+      setLoading(false);
+      setError(getErrorMessage(error));
+    }
   };
 
   return (
@@ -34,36 +57,18 @@ const Register = () => {
       <Col
         md={10}
         lg={10}
-        className="flex bg-no-repeat bg-cover h-screen"
-        style={{
-          backgroundImage:
-            "url(https://images.pexels.com/photos/6446708/pexels-photo-6446708.jpeg)",
-        }}
+        className="flex bg-no-repeat bg-cover h-screen authBG"
       ></Col>
 
       <Col md={14} lg={14} className="flex justify-center">
         <div className="w-full md:w-3/4 md:p-10 p-4">
-          <div className="mt-6">HMarket</div>
+          <div className="mt-6">Sync</div>
           <div className="mt-16">
             <div className={"mb-10"}>
               <h2 className="text-bold text-3xl">Create Account</h2>
               <span>For your creative or business needs.</span>
             </div>
-
-            <Row gutter={[16, 16]} className="mb-4">
-              <Col md={12}>
-                <Button block type="ghost" size="large">
-                  Log in with Google
-                </Button>
-              </Col>
-
-              <Col md={12}>
-                <Button block type="ghost" size="large">
-                  Log in with Apple
-                </Button>
-              </Col>
-            </Row>
-
+            {error && <Alert type="error" message={error} />}
             <Form
               name="basic"
               initialValues={{
@@ -71,8 +76,6 @@ const Register = () => {
               }}
               layout="vertical"
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
             >
               <Row gutter={[16, 16]}>
                 <Col md={12} lg={12}>
@@ -115,37 +118,7 @@ const Register = () => {
                   },
                 ]}
               >
-                <Input size="large" />
-              </Form.Item>
-
-              <Form.Item
-                label="Email Address"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your email!",
-                  },
-                ]}
-              >
-                <Radio.Group className="flex" onChange={onChange} value={value}>
-                  <Radio
-                    className={`p-3 w-1/2 rounded-md border-[1px] border-solid hover:border-purple-700 ${
-                      value === 1 ? "border-purple-700" : "border-neutral-300"
-                    }`}
-                    value={1}
-                  >
-                    Independent Creative
-                  </Radio>
-                  <Radio
-                    className={`p-3 w-1/2 rounded-md border-[1px] border-solid hover:border-purple-700  ${
-                      value === 2 ? "border-purple-700" : "border-neutral-300"
-                    }`}
-                    value={2}
-                  >
-                    Business
-                  </Radio>
-                </Radio.Group>
+                <Input size="large" type="email" />
               </Form.Item>
 
               <Form.Item
@@ -166,7 +139,13 @@ const Register = () => {
                   span: 24,
                 }}
               >
-                <Button block type="primary" htmlType="submit" size="large">
+                <Button
+                  loading={loading}
+                  block
+                  type="primary"
+                  htmlType="submit"
+                  size="large"
+                >
                   Submit
                 </Button>
               </Form.Item>

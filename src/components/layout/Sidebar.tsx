@@ -3,11 +3,11 @@ import type { MenuProps } from "antd";
 import { Menu } from "antd";
 
 import {
-  BagIcon,
   ChartIcon,
   IntegrationIcon,
   PaperIcon,
   SettingsIcon,
+  UserIcon,
 } from "../icon";
 import { useNavigate } from "react-router-dom";
 
@@ -25,9 +25,9 @@ const items: MenuProps["items"] = [
   },
 
   {
-    label: "Product",
-    key: "/product",
-    icon: <BagIcon />,
+    label: "Profile",
+    key: "/profile",
+    icon: <UserIcon />,
   },
 
   {
