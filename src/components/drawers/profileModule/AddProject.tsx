@@ -1,19 +1,10 @@
-import {
-  Drawer,
-  Form,
-  Input,
-  Button,
-  Select,
-  notification,
-  Upload,
-} from "antd";
+import { Drawer, Form, Input, Button, notification, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { DataStore, Storage } from "aws-amplify";
 import { useEffect, useState } from "react";
 import { Project } from "../../../models/index.js";
 import type { RcFile } from "antd/es/upload/interface";
 import { DataType } from "../../../pages/profile/index.js";
-const { Option } = Select;
 
 type fileType = {
   name: string;

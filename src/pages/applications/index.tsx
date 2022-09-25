@@ -9,8 +9,7 @@ function Applications() {
     <section>
       <div className="flex justify-between">
         <div>
-          <h2>All Users</h2>
-          <span>More than 400+ new users</span>
+          <h2>All Applications</h2>
         </div>
         <div className="space-x-4 flex items-center">
           <Button
@@ -19,9 +18,6 @@ function Applications() {
             className="rounded-md"
           >
             + Create New Entry
-          </Button>
-          <Button type="default" className="rounded-md">
-            Generate Report
           </Button>
         </div>
       </div>

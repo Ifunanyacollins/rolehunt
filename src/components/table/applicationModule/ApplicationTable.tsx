@@ -2,12 +2,14 @@ import { Avatar, Button, Table, Dropdown, Menu } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import React, { useEffect, useState } from "react";
 import { DataStore } from "aws-amplify";
+import type { MenuProps } from "antd";
 import { Application } from "../../../models/index.js";
 import dayjs from "dayjs";
+import UpdateAppStatus from "../../drawers/applicationModule/UpdateAppStatus";
 var localizedFormat = require("dayjs/plugin/localizedFormat");
 dayjs.extend(localizedFormat);
 
-interface DataType {
+export interface DataType {
   id: string;
   company: string;
   status: string;
@@ -16,18 +18,39 @@ interface DataType {
   channel: string;
 }
 
+const statusColor: any = {
+  IN_REVIEW: "bg-blue-300",
+  REJECTED: "bg-red-300",
+  INTERVIEW: "bg-green-300",
+  WITHDREW: "bg-purple-300",
+};
+
 const UserActiveTable: React.FC = () => {
+  const [data, setData] = useState<DataType[]>([]);
+  const [open, setOpen] = useState(false);
+  const [editID, setEditID] = useState<DataType | null>(null);
+  const handleMenuSelection: MenuProps["onClick"] = async ({ key }) => {
+    if (key === "status") {
+      setOpen(true);
+    }
+
+    if (key === "delete") {
+      DataStore.delete(editID as Application);
+    }
+  };
+
   const menu = (
     <Menu
+      onClick={handleMenuSelection}
       items={[
         {
-          key: "1",
+          key: "status",
           label: "Update Status",
         },
 
         {
-          key: "2",
-          label: "Set Notification",
+          key: "delete",
+          label: "Delete Application",
         },
       ]}
     />
@@ -60,6 +83,9 @@ const UserActiveTable: React.FC = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      render: (text, _) => (
+        <span className={`${statusColor[text]} p-1 rounded`}>{text}</span>
+      ),
     },
 
     {
@@ -73,13 +99,13 @@ const UserActiveTable: React.FC = () => {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Dropdown overlay={menu}>
+        <Dropdown onOpenChange={() => setEditID(record)} overlay={menu}>
           <Button type="link">Actions</Button>
         </Dropdown>
       ),
     },
   ];
-  const [data, setData] = useState<DataType[]>([]);
+
   useEffect(() => {
     const subscription = DataStore.observeQuery(Application).subscribe(
       ({ items }) => {
@@ -91,7 +117,16 @@ const UserActiveTable: React.FC = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  return <Table rowKey="id" columns={columns} dataSource={data} />;
+  return (
+    <>
+      <Table rowKey="id" columns={columns} dataSource={data} />
+      <UpdateAppStatus
+        onClose={() => setOpen(false)}
+        visible={open}
+        id={editID}
+      />
+    </>
+  );
 };
 
 export default UserActiveTable;

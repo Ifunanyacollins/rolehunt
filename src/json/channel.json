@@ -1,0 +1,11 @@
+[
+    {"name":"Linkedin", "url":"https://www.linkedin.com/jobs/", "logo":"https://res.cloudinary.com/mindcolony/image/upload/v1664109492/linkedin_ud9975.png", "region":"World Wide"},
+    {"name":"Indeed","url":"https://www.indeed.com/","logo":"https://res.cloudinary.com/mindcolony/image/upload/v1664109492/indeed_zca1wf.png", "region":"World Wide"},
+    {"name":"AngelList","url":"https://angel.co/jobs","logo":"https://res.cloudinary.com/mindcolony/image/upload/v1664109492/anglist_m5ccqt.png", "region":"World Wide"},
+    {"name":"Remote.io","url":"https://www.remote.io/remote-jobs-to-work-from-home","logo":"https://res.cloudinary.com/mindcolony/image/upload/v1664112828/kjqjgckqjyzwpcm6ns2z.png", "region":"World Wide"},
+    {"name":"Ziprecruiter","url":"https://www.ziprecruiter.com/","logo":"https://res.cloudinary.com/mindcolony/image/upload/v1664136243/loze0cgvihmstm3ctvep.png", "region":"World Wide"},
+    {"name":"Simplyhired","url":"https://www.simplyhired.com/browse-jobs/titles","logo":"https://res.cloudinary.com/mindcolony/image/upload/v1664136762/tzrgp9cb64ngfp54yr4b.jpg", "region":"World Wide"},
+    {"name":"Careerbuilder","url":"https://www.careerbuilder.com/browse","logo":"https://res.cloudinary.com/mindcolony/image/upload/v1664137039/CareerBuilder-Emblem_gmfjzn.png", "region":"World Wide"},
+    {"name":"job.com","url":"https://www.job.com/","logo":"https://res.cloudinary.com/mindcolony/image/upload/v1664137299/bqzkjb19o2pc7yqfnymu_bk7uco.png", "region":"World Wide"}
+
+]

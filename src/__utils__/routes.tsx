@@ -1,5 +1,5 @@
 const routesTitle: { [key: string]: string } = {
-  "/": "Overview",
+  "/overview": "Overview",
   "/users": "Users",
   "/profile": "Profile",
   "/users/pending": "Review New Users",
