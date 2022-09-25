@@ -1,22 +1,42 @@
-import { Avatar, Dropdown, Menu, Space } from "antd";
-import { useLocation } from "react-router-dom";
+import { Avatar, Dropdown, Menu, notification, Space } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import { BellIcon, SearchIcon } from "../icon";
 import routesTitle from "../../__utils__/routes";
-
-const menu = (
-  <Menu
-    items={[
-      {
-        key: "1",
-        label: "Profile",
-      },
-    ]}
-  />
-);
+import type { MenuProps } from "antd";
+import { Auth, DataStore } from "aws-amplify";
+import { getErrorMessage } from "../../__utils__/getErrorMessage";
 
 function Header({ user }: { user: any }) {
   let location = useLocation();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await DataStore.clear();
+      await Auth.signOut();
+      navigate("/auth/login");
+    } catch (error) {
+      notification.open({ message: getErrorMessage(error), type: "error" });
+    }
+  };
+  const handleMenuSelection: MenuProps["onClick"] = async ({ key }) => {
+    if (key === "logout") {
+      await handleLogout();
+    }
+  };
+
+  const menu = (
+    <Menu
+      onClick={handleMenuSelection}
+      items={[
+        {
+          key: "logout",
+          label: "Logout",
+        },
+      ]}
+    />
+  );
+
   return (
     <div className="flex-shrink-0 h-20 flex justify-between items-center px-10">
       <div>
@@ -29,14 +49,13 @@ function Header({ user }: { user: any }) {
       </div>
 
       <div className="space-x-8 flex items-center">
-        <SearchIcon />
         <BellIcon />
 
         <div className=" space-x-3 ">
           <Avatar />
           <Dropdown overlay={menu}>
-            <Space className="cursor-pointer items-center">
-              Patrick Igwe
+            <Space className="cursor-pointer items-center capitalize">
+              {`${user?.attributes["custom:firstName"]} ${user?.attributes["custom:lastName"]}`}
               <DownOutlined />
             </Space>
           </Dropdown>

@@ -1,5 +1,5 @@
 import { Row, Col, Button, Checkbox, Form, Input, Alert } from "antd";
-import { Auth } from "aws-amplify";
+import { Auth, DataStore } from "aws-amplify";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -21,6 +21,7 @@ const Login = () => {
     try {
       setError(null);
       setLoading(true);
+      await DataStore.clear();
       const user = await Auth.signIn(values.username, values.password);
       setLoading(false);
       navigate(`/`);

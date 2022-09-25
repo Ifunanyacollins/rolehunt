@@ -3,10 +3,10 @@ import type { MenuProps } from "antd";
 import { Menu } from "antd";
 
 import {
+  BagIcon,
   ChartIcon,
   IntegrationIcon,
   PaperIcon,
-  SettingsIcon,
   UserIcon,
 } from "../icon";
 import { useNavigate } from "react-router-dom";
@@ -15,12 +15,12 @@ const items: MenuProps["items"] = [
   {
     label: "Overview",
     key: "/overview",
-    icon: <ChartIcon />,
+    icon: <BagIcon />,
   },
 
   {
     label: "Applications",
-    key: "applications",
+    key: "/applications",
     icon: <PaperIcon />,
   },
 
@@ -37,20 +37,8 @@ const items: MenuProps["items"] = [
   },
 
   {
-    label: "Settings",
-    key: "/settings",
-    icon: <SettingsIcon />,
-  },
-
-  {
     label: "Integrations",
     key: "/integrations",
-    icon: <IntegrationIcon />,
-  },
-
-  {
-    label: "Developers",
-    key: "/developers",
     icon: <IntegrationIcon />,
   },
 ];
@@ -60,7 +48,7 @@ function Sidebar() {
   const navigate = useNavigate();
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
-    navigate(e.key);
+    navigate(`/board${e.key}`);
   };
   return (
     <Menu
