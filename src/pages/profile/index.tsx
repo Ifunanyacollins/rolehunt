@@ -24,6 +24,7 @@ function Profile() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState<DataType | null>(null);
+
   const handleChange = (args: ProfileAction) => {
     dispatch({ type: args.type, payload: args.payload });
   };

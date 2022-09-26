@@ -9,10 +9,11 @@ const ApplicationStatus = {
   "WITHDREW": "WITHDREW"
 };
 
-const { Application, Project } = initSchema(schema);
+const { Application, Project, Profile } = initSchema(schema);
 
 export {
   Application,
   Project,
+  Profile,
   ApplicationStatus
 };

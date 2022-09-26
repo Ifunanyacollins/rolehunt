@@ -7,7 +7,7 @@ function Main(props: any) {
   return (
     <div className="h-screen flex overflow-y-hidden">
       <div className="flex-shrink-0 overflow-y-scroll w-64 border">
-        <h2 className="text-center py-4">Hmarketss</h2>
+        <h2 className="text-center py-4">ULO</h2>
         <div className="py-8">
           <SideBar />
         </div>

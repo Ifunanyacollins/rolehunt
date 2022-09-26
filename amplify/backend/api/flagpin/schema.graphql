@@ -21,3 +21,10 @@ type Project @model @auth(rules: [{ allow: owner }]) {
   description: String
   poster: String
 }
+
+type Profile @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  tagline: String!
+  summary: String!
+  avatar: String!
+}
