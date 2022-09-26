@@ -83,7 +83,7 @@ function Profile() {
               <div className="absolute backdrop-brightness-50 text-white z-10 bottom-0 p-3 w-full  justify-between group-hover:flex hidden">
                 <span className="capitalize text-base">{project.name}</span>
                 <div className="space-x-3">
-                  <a href={project.url} target="_blank" className="text-white">
+                  <a href={project.url} target="_blank" rel="noreferrer" className="text-white">
                     <LinkOutlined className="text-xl" />
                   </a>
                   <EditOutlined
