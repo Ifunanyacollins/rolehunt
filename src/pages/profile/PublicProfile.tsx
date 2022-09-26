@@ -1,7 +1,7 @@
-import { Row, Col, Avatar, Button} from "antd";
+import { Row, Col, Avatar, Button, Tag} from "antd";
 
 import { AntDesignOutlined } from '@ant-design/icons';
-import {  } from 'antd';
+
 
 
 function PublicProfile() {
@@ -33,13 +33,24 @@ function PublicProfile() {
 
       <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} className="p-10 md:p-20">
         <Col className="h-[15rem]" span={8}>
-          <div>Basic profile column</div>
+          <div className="border-solid border-slate-100 border-4 rounded-lg p-6 h-[20rem] bg-gradient-to-r from-cyan-500 to-blue-500">
+            <Tag className="rounded-3xl text-white border-none bg-[rgba(0,0,0,.5)] p-2 pl-4 pr-4 font-bold text-md">CASE STUDY</Tag>
+            Basic profile column
+          </div>
         </Col>
+
         <Col className="h-[15rem]" span={8}>
-          <div>Basic profile column</div>
+          <div className="border-solid border-slate-100 border-4 rounded-lg p-6 h-[20rem] bg-gradient-to-r from-cyan-500 to-blue-500">
+            <Tag className="rounded-3xl text-white border-none bg-[rgba(0,0,0,.5)] p-2 pl-4 pr-4 font-bold text-md">CASE STUDY</Tag>
+            Basic profile column
+          </div>
         </Col>
+
         <Col className="h-[15rem]" span={8}>
-          <div>Basic profile column</div>
+          <div className="border-solid border-slate-100 border-4 rounded-lg p-6 h-[20rem] bg-gradient-to-r from-cyan-500 to-blue-500">
+            <Tag className="rounded-3xl text-white border-none bg-[rgba(0,0,0,.5)] p-2 pl-4 pr-4 font-bold text-md">CASE STUDY</Tag>
+            Basic profile column
+          </div>
         </Col>
       </Row>
       
