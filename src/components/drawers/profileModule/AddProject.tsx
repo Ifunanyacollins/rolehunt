@@ -101,7 +101,7 @@ function AddProject({
         <Form.Item
           label="Project Url"
           name="url"
-          rules={[{ required: true, message: "url is required" }]}
+          rules={[{ required: false, message: "url is required" }]}
         >
           <Input size="large" type="url" />
         </Form.Item>
