@@ -53,7 +53,9 @@ const Register = () => {
 
       <Col md={14} lg={14} className="flex justify-center">
         <div className="w-full md:w-3/4 md:p-10 p-4">
-          <div className="mt-6">Sync</div>
+          <div className="mt-6">
+            <h2>Role Hunt</h2>
+          </div>
           <div className="mt-16">
             <div className={"mb-10"}>
               <h2 className="text-bold text-3xl">Create Account</h2>
