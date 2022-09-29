@@ -14,7 +14,7 @@ function UpdateAppStatus({
 }: {
   visible: boolean;
   onClose: () => void;
-  id: DataType | null;
+  id: Application | null;
 }) {
   const [saving, setSaving] = useState(false);
   const [form] = Form.useForm();

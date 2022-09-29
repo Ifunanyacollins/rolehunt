@@ -1,13 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Amplify } from "aws-amplify";
+import { Amplify, AuthModeStrategyType } from "aws-amplify";
 import awsExports from "./aws-exports";
 import "./style/app.css";
 import "./style/index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-Amplify.configure(awsExports);
+Amplify.configure({
+  ...awsExports,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH,
+  },
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

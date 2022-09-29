@@ -7,7 +7,21 @@ export enum ApplicationStatus {
   WITHDREW = "WITHDREW"
 }
 
-
+export declare class ProjectType {
+  readonly id: string;
+  readonly name: string;
+  readonly url?: string | null;
+  readonly description?: string | null;
+  readonly poster?: string | null;
+  readonly caseStudie?: string | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  readonly owner?: string | null;
+  readonly _version?: string | null;
+  readonly _lastChangedAt?: string | null;
+  readonly _deleted?: string | null;
+  constructor(init: ModelInit<ProjectType>);
+}
 
 type ApplicationMetaData = {
   readOnlyFields: 'updatedAt';
@@ -39,6 +53,7 @@ export declare class Project {
   readonly url?: string | null;
   readonly description?: string | null;
   readonly poster?: string | null;
+  readonly caseStudie?: string | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Project, ProjectMetaData>);
@@ -50,6 +65,8 @@ export declare class Profile {
   readonly tagline: string;
   readonly summary: string;
   readonly avatar: string;
+  readonly userID?: string | null;
+  readonly projects?: ProjectType[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Profile, ProfileMetaData>);

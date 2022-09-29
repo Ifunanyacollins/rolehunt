@@ -9,8 +9,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/board" element={<Main />}>
-          <Route path="overview" element={<OverviewRoute />} />
+        <Route path="/" element={<Main />}>
+          <Route index element={<OverviewRoute />} />
           <Route path="applications/*" element={<ApplicationRoute />} />
           <Route path="profile" element={<ProfileRoute />} />
         </Route>

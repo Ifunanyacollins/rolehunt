@@ -82,6 +82,7 @@ export const getProject = /* GraphQL */ `
       url
       description
       poster
+      caseStudie
       createdAt
       updatedAt
       _version
@@ -104,6 +105,7 @@ export const listProjects = /* GraphQL */ `
         url
         description
         poster
+        caseStudie
         createdAt
         updatedAt
         _version
@@ -135,6 +137,7 @@ export const syncProjects = /* GraphQL */ `
         url
         description
         poster
+        caseStudie
         createdAt
         updatedAt
         _version
@@ -154,6 +157,21 @@ export const getProfile = /* GraphQL */ `
       tagline
       summary
       avatar
+      userID
+      projects {
+        id
+        name
+        url
+        description
+        poster
+        caseStudie
+        createdAt
+        updatedAt
+        owner
+        _version
+        _lastChangedAt
+        _deleted
+      }
       createdAt
       updatedAt
       _version
@@ -175,6 +193,21 @@ export const listProfiles = /* GraphQL */ `
         tagline
         summary
         avatar
+        userID
+        projects {
+          id
+          name
+          url
+          description
+          poster
+          caseStudie
+          createdAt
+          updatedAt
+          owner
+          _version
+          _lastChangedAt
+          _deleted
+        }
         createdAt
         updatedAt
         _version
@@ -205,6 +238,21 @@ export const syncProfiles = /* GraphQL */ `
         tagline
         summary
         avatar
+        userID
+        projects {
+          id
+          name
+          url
+          description
+          poster
+          caseStudie
+          createdAt
+          updatedAt
+          owner
+          _version
+          _lastChangedAt
+          _deleted
+        }
         createdAt
         updatedAt
         _version

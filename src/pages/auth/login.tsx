@@ -26,6 +26,7 @@ const Login = () => {
       setLoading(false);
       navigate(`/`);
     } catch (error) {
+      console.log(getErrorMessage(error));
       if (getErrorMessage(error).includes("User is not confirmed")) {
         navigate(`/auth/confirm`);
       }

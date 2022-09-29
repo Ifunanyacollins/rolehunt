@@ -80,7 +80,11 @@ function AddProject({
   };
 
   useEffect(() => {
-    form.setFieldsValue({ name: editData?.name, url: editData?.url });
+    form.setFieldsValue({
+      name: editData?.name,
+      url: editData?.url,
+      caseStudie: editData?.caseStudie,
+    });
   }, [editData]);
   return (
     <Drawer onClose={onClose} open={visible}>
@@ -99,6 +103,14 @@ function AddProject({
           rules={[{ required: true, message: "url is required" }]}
         >
           <Input size="large" type="url" />
+        </Form.Item>
+
+        <Form.Item
+          label="Case Studie"
+          name="caseStudie"
+          rules={[{ required: true, message: "Case Studie is required" }]}
+        >
+          <Input.TextArea size="large" />
         </Form.Item>
 
         <Form.Item

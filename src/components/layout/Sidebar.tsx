@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 const items: MenuProps["items"] = [
   {
     label: "Overview",
-    key: "/overview",
+    key: "/",
     icon: <BagIcon />,
   },
 
@@ -48,7 +48,7 @@ function Sidebar() {
   const navigate = useNavigate();
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
-    navigate(`/board${e.key}`);
+    navigate(`${e.key}`);
   };
   return (
     <Menu

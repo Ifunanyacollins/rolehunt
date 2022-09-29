@@ -6,7 +6,7 @@ export const reducer = (
 ): ProfileState => {
   switch (action.type) {
     case "SET_STORE":
-      return { ...action.payload };
+      return { ...state, ...action.payload };
     case "SET_AVATAR":
       return { ...state, avatar: action.payload };
     case "SET_TAGLINE":

@@ -72,6 +72,7 @@ export const createProject = /* GraphQL */ `
       url
       description
       poster
+      caseStudie
       createdAt
       updatedAt
       _version
@@ -92,6 +93,7 @@ export const updateProject = /* GraphQL */ `
       url
       description
       poster
+      caseStudie
       createdAt
       updatedAt
       _version
@@ -112,6 +114,7 @@ export const deleteProject = /* GraphQL */ `
       url
       description
       poster
+      caseStudie
       createdAt
       updatedAt
       _version
@@ -131,6 +134,21 @@ export const createProfile = /* GraphQL */ `
       tagline
       summary
       avatar
+      userID
+      projects {
+        id
+        name
+        url
+        description
+        poster
+        caseStudie
+        createdAt
+        updatedAt
+        owner
+        _version
+        _lastChangedAt
+        _deleted
+      }
       createdAt
       updatedAt
       _version
@@ -150,6 +168,21 @@ export const updateProfile = /* GraphQL */ `
       tagline
       summary
       avatar
+      userID
+      projects {
+        id
+        name
+        url
+        description
+        poster
+        caseStudie
+        createdAt
+        updatedAt
+        owner
+        _version
+        _lastChangedAt
+        _deleted
+      }
       createdAt
       updatedAt
       _version
@@ -169,6 +202,21 @@ export const deleteProfile = /* GraphQL */ `
       tagline
       summary
       avatar
+      userID
+      projects {
+        id
+        name
+        url
+        description
+        poster
+        caseStudie
+        createdAt
+        updatedAt
+        owner
+        _version
+        _lastChangedAt
+        _deleted
+      }
       createdAt
       updatedAt
       _version

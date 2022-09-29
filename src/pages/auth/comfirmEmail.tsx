@@ -1,4 +1,4 @@
-import { Row, Col, Button, Form, Input, Alert } from "antd";
+import { Row, Col, Button, Form, Input, Alert, Modal } from "antd";
 import { Auth } from "aws-amplify";
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -19,6 +19,8 @@ const ConfirmEmail = () => {
   const username = searchParams.get("email") as string;
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingEamil, setLoadingEmail] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const onFinish = async (values: valuesParams) => {
     try {
       setError(null);
@@ -35,6 +37,18 @@ const ConfirmEmail = () => {
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const handleResend = async (username: any) => {
+    setLoadingEmail(true);
+    try {
+      await Auth.resendSignUp(username);
+      setLoadingEmail(false);
+      setOpenModal(false);
+    } catch (error) {
+      setLoadingEmail(false);
+      setError(getErrorMessage(error));
+    }
   };
 
   return (
@@ -108,9 +122,62 @@ const ConfirmEmail = () => {
                 </Button>
               </Form.Item>
             </Form>
+            <div className="flex justify-center">
+              <Button
+                onClick={() =>
+                  username ? handleResend(username) : setOpenModal(true)
+                }
+                type="link"
+              >
+                Resend Code
+              </Button>
+            </div>
           </div>
         </div>
       </Col>
+      <Modal
+        footer={null}
+        visible={openModal}
+        onCancel={() => setOpenModal(false)}
+      >
+        <Form
+          name="basic"
+          initialValues={{
+            remember: true,
+          }}
+          layout="vertical"
+          onFinish={handleResend}
+        >
+          <Form.Item
+            label="Email Address"
+            name="username"
+            rules={[
+              {
+                required: true,
+                message: "Please input your username",
+              },
+            ]}
+          >
+            <Input size="large" type="email" />
+          </Form.Item>
+
+          <Form.Item
+            wrapperCol={{
+              span: 24,
+            }}
+          >
+            <Button
+              loading={loadingEamil}
+              htmlType="submit"
+              block
+              type="primary"
+              size="large"
+            >
+              Resend Code
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </Row>
   );
 };

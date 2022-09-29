@@ -1,4 +1,11 @@
-type Application @model @auth(rules: [{ allow: owner }]) {
+type Application
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
   id: ID!
   company: String!
   status: ApplicationStatus!
@@ -14,17 +21,49 @@ enum ApplicationStatus {
   WITHDREW
 }
 
-type Project @model @auth(rules: [{ allow: owner }]) {
+type Project
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
   id: ID!
   name: String!
   url: String
   description: String
   poster: String
+  caseStudie: String
 }
 
-type Profile @model @auth(rules: [{ allow: owner }]) {
+type ProjectType {
+  id: ID!
+  name: String!
+  url: String
+  description: String
+  poster: String
+  caseStudie: String
+  createdAt: String
+  updatedAt: String
+  owner: String
+  _version: String
+  _lastChangedAt: String
+  _deleted: String
+}
+
+type Profile
+  @model
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: public, operations: [read], provider: iam }
+    ]
+  ) {
   id: ID!
   tagline: String!
   summary: String!
   avatar: String!
+  userID: String
+  projects: [ProjectType!]
 }

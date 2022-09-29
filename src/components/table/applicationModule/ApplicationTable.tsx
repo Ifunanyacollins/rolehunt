@@ -26,9 +26,9 @@ const statusColor: any = {
 };
 
 const UserActiveTable: React.FC = () => {
-  const [data, setData] = useState<DataType[]>([]);
+  const [data, setData] = useState<Application[]>([]);
   const [open, setOpen] = useState(false);
-  const [editID, setEditID] = useState<DataType | null>(null);
+  const [editID, setEditID] = useState<Application | null>(null);
   const handleMenuSelection: MenuProps["onClick"] = async ({ key }) => {
     if (key === "status") {
       setOpen(true);
@@ -55,7 +55,7 @@ const UserActiveTable: React.FC = () => {
       ]}
     />
   );
-  const columns: ColumnsType<DataType> = [
+  const columns: ColumnsType<Application> = [
     {
       title: "Company",
       dataIndex: "company",
@@ -107,14 +107,9 @@ const UserActiveTable: React.FC = () => {
   ];
 
   useEffect(() => {
-    const subscription = DataStore.observeQuery(Application).subscribe(
-      ({ items }) => {
-        console.log(items);
-        setData(items as DataType[]);
-      }
-    );
-
-    return () => subscription.unsubscribe();
+    DataStore.query(Application).then((models) => {
+      setData(models);
+    });
   }, []);
 
   return (

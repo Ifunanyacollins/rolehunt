@@ -2,6 +2,7 @@
   "AppSyncApiName": "flagpin",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2022-09-29T09:05:06.665Z",
   "AuthCognitoUserPoolId": {
     "Fn::GetAtt": [
       "authflagpin",

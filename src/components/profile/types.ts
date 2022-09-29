@@ -1,3 +1,4 @@
+import { ProjectType } from "../../models/index.js";
 
 export type projectType = {
     url:string;
@@ -12,7 +13,7 @@ export type ProfileAction = {
    avatar:string;
    tagline:string;
    summary:string;
-   projects: projectType[]
+   projects:  ProjectType[]
   };
 
 
