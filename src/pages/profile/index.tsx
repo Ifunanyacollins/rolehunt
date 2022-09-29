@@ -131,6 +131,8 @@ function ProfilePage(props: any) {
               summary: items[0].summary,
             },
           });
+        } else {
+          handleSaveProfile(state);
         }
       }
     );
