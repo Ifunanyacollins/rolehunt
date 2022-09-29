@@ -4,7 +4,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { BellIcon } from "../icon";
 import routesTitle from "../../__utils__/routes";
 import type { MenuProps } from "antd";
-import { Auth, DataStore } from "aws-amplify";
+import { Auth } from "aws-amplify";
 import { getErrorMessage } from "../../__utils__/getErrorMessage";
 
 function Header({ user }: { user: any }) {
@@ -12,7 +12,6 @@ function Header({ user }: { user: any }) {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
-      await DataStore.clear();
       await Auth.signOut();
       navigate("/auth/login");
     } catch (error) {

@@ -1,5 +1,5 @@
 import { Row, Col, Button, Checkbox, Form, Input, Alert } from "antd";
-import { Auth } from "aws-amplify";
+import { Auth, DataStore } from "aws-amplify";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -35,6 +35,7 @@ const Register = () => {
           enabled: true,
         },
       });
+      await DataStore.clear();
       setLoading(false);
       navigate(`/auth/confirm?email=${values.email}`);
     } catch (error) {
