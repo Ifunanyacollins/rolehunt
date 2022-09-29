@@ -33,11 +33,10 @@ export interface DataType {
 }
 
 function ProfilePage(props: any) {
-  const [saving, setSaving] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState<DataType | null>(null);
-  const [currentProfile, setCurrentProfile] = useState<Profile>();
+  const [currentProfile, setCurrentProfile] = useState<Profile | null>(null);
   const [uploading, setUploading] = useState(false);
   const [openUploader, setUploader] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -77,7 +76,6 @@ function ProfilePage(props: any) {
 
   const handleSaveProfile = async (value: Omit<Profile, "id">) => {
     try {
-      setSaving(true);
       const payload = {
         ...value,
         name: `${props.user.attributes["custom:firstName"]} ${props.user.attributes["custom:lastName"]}`,
@@ -85,7 +83,6 @@ function ProfilePage(props: any) {
         userID: props.user.attributes.sub,
       };
       currentProfile ? await DataUpdate(payload) : await DataSave(payload);
-      setSaving(false);
 
       notification.open({
         message: "Profile Status",
@@ -141,19 +138,14 @@ function ProfilePage(props: any) {
     // eslint-disable-next-line
   }, [props?.user]);
 
+  useEffect(() => {
+    if (currentProfile) {
+      handleSaveProfile(state);
+    }
+    // eslint-disable-next-line
+  }, [state]);
   return (
     <section>
-      <div className="h-12  flex justify-end items-center space-x-4">
-        {/* <Button type="dashed">Preview</Button> */}
-        <Button
-          loading={saving}
-          onClick={() => handleSaveProfile(state)}
-          type="primary"
-        >
-          Save Changes
-        </Button>
-      </div>
-
       <div className="flex items-center flex-col space-y-3">
         <div className="flex">
           <div className=" h-24 w-24 rounded-full border border-solid border-gray-300 overflow-hidden">
