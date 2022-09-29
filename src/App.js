@@ -7,7 +7,9 @@ import ProfileRoute from "./pages/profile/ProfileRoutes";
 import PublicProfile from "./pages/profile/PublicProfile";
 import ReportRoute from "./pages/report/reportRoutes";
 import IntegrationRoute from "./pages/integrations";
+import { DataStore } from "aws-amplify";
 function App() {
+  DataStore.start();
   return (
     <Router>
       <Routes>
