@@ -118,20 +118,24 @@ function ProfilePage(props: any) {
   }, []);
 
   useEffect(() => {
-    DataStore.query(Profile).then((items) => {
-      if (items.length) {
-        setCurrentProfile(items[0]);
+    const subscription = DataStore.observeQuery(Profile).subscribe(
+      ({ items }) => {
+        if (items.length) {
+          setCurrentProfile(items[0]);
 
-        handleChange({
-          type: "SET_STORE",
-          payload: {
-            avatar: items[0].avatar,
-            tagline: items[0].tagline,
-            summary: items[0].summary,
-          },
-        });
+          handleChange({
+            type: "SET_STORE",
+            payload: {
+              avatar: items[0].avatar,
+              tagline: items[0].tagline,
+              summary: items[0].summary,
+            },
+          });
+        }
       }
-    });
+    );
+
+    return () => subscription.unsubscribe();
   }, [props?.user]);
 
   return (
@@ -143,7 +147,7 @@ function ProfilePage(props: any) {
           onClick={() => handleSaveProfile(state)}
           type="primary"
         >
-          Publish
+          Save Changes
         </Button>
       </div>
 
@@ -178,19 +182,21 @@ function ProfilePage(props: any) {
         >
           {state.summary}
         </Paragraph>
-        <Tooltip title="Copied" open={copied}>
-          <Button
-            onClick={() =>
-              handleCopy(
-                `${process.env.REACT_APP_BASE_URL}/profile/${currentProfile?.id}`
-              )
-            }
-            type="link"
-          >
-            Copy Profile link
-            <CopyFilled />
-          </Button>
-        </Tooltip>
+        {currentProfile?.id && (
+          <Tooltip title="Copied" open={copied}>
+            <Button
+              onClick={() =>
+                handleCopy(
+                  `https://main.d36ko744beg46o.amplifyapp.com/profile/${currentProfile?.id}`
+                )
+              }
+              type="link"
+            >
+              Copy Profile link
+              <CopyFilled />
+            </Button>
+          </Tooltip>
+        )}
       </div>
       <div className="my-20 border border-gray-500">
         <Title level={5}>Projects</Title>

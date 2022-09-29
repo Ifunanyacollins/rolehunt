@@ -31,7 +31,7 @@ function PublicProfile() {
                 <Image imgKey={profile?.avatar} name="Avatar" />
               </div>
 
-              <h1 className="text-2xl mt-4 font-medium">{profile.name}</h1>
+              <h1 className="text-2xl mt-4 font-medium">{profile?.name}</h1>
               <h3 className="text-5xl font-bold">{profile?.tagline}</h3>
 
               <div className="mt-8">
@@ -52,7 +52,7 @@ function PublicProfile() {
 
           <Col xs={24} sm={24} md={12} lg={12} className="h-[30rem] p-10">
             <div>
-              {profile?.projects?.length && (
+              {!!profile?.projects?.length && (
                 <Image imgKey={profile?.projects[0].poster} name="index" />
               )}
             </div>
