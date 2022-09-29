@@ -138,6 +138,7 @@ function ProfilePage(props: any) {
     );
 
     return () => subscription.unsubscribe();
+    // eslint-disable-next-line
   }, [props?.user]);
 
   return (
