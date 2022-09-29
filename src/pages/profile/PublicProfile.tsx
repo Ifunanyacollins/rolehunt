@@ -11,6 +11,7 @@ function PublicProfile() {
   const [profile, setProfile] = useState<any>({});
   const { id } = useParams();
   useEffect(() => {
+    DataStore.start();
     const subscription = DataStore.observeQuery(Profile, (c) =>
       c.id("eq", id as string)
     ).subscribe(({ items }) => {

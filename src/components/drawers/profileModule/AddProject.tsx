@@ -21,9 +21,11 @@ function AddProject({
   editData,
   onClose,
   setEditData,
+  handleSaveProfileAfterProjectupdate,
 }: {
   visible: boolean;
   onClose: () => void;
+  handleSaveProfileAfterProjectupdate: () => void;
   editData: DataType | null;
   setEditData: React.Dispatch<React.SetStateAction<DataType | null>>;
 }) {
@@ -62,6 +64,7 @@ function AddProject({
       setEditData(null);
       form.resetFields();
       onClose();
+      handleSaveProfileAfterProjectupdate();
       notification.open({
         message: "Application Status",
         description: "Application saved successfully!",

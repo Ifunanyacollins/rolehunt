@@ -107,9 +107,13 @@ const UserActiveTable: React.FC = () => {
   ];
 
   useEffect(() => {
-    DataStore.query(Application).then((models) => {
-      setData(models);
-    });
+    const subscription = DataStore.observeQuery(Application).subscribe(
+      ({ items }) => {
+        setData(items);
+      }
+    );
+
+    return () => subscription.unsubscribe();
   }, []);
 
   return (

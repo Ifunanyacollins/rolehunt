@@ -33,6 +33,7 @@ export interface DataType {
 }
 
 function ProfilePage(props: any) {
+  const [saving, setSaving] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
   const [open, setOpen] = useState(false);
   const [editData, setEditData] = useState<DataType | null>(null);
@@ -76,6 +77,7 @@ function ProfilePage(props: any) {
 
   const handleSaveProfile = async (value: Omit<Profile, "id">) => {
     try {
+      setSaving(true);
       const payload = {
         ...value,
         name: `${props.user.attributes["custom:firstName"]} ${props.user.attributes["custom:lastName"]}`,
@@ -83,6 +85,7 @@ function ProfilePage(props: any) {
         userID: props.user.attributes.sub,
       };
       currentProfile ? await DataUpdate(payload) : await DataSave(payload);
+      setSaving(false);
 
       notification.open({
         message: "Profile Status",
@@ -138,14 +141,22 @@ function ProfilePage(props: any) {
     // eslint-disable-next-line
   }, [props?.user]);
 
-  useEffect(() => {
-    if (currentProfile) {
-      handleSaveProfile(state);
-    }
-    // eslint-disable-next-line
-  }, [state]);
+  const handleSaveProfileAfterProjectupdate = () => {
+    handleSaveProfile(state);
+  };
   return (
     <section>
+      <div className="h-12  flex justify-end items-center space-x-4">
+        {/* <Button type="dashed">Preview</Button> */}
+        <Button
+          loading={saving}
+          onClick={() => handleSaveProfile(state)}
+          type="primary"
+        >
+          Save Changes
+        </Button>
+      </div>
+
       <div className="flex items-center flex-col space-y-3">
         <div className="flex">
           <div className=" h-24 w-24 rounded-full border border-solid border-gray-300 overflow-hidden">
@@ -241,6 +252,9 @@ function ProfilePage(props: any) {
         onClose={() => setOpen(false)}
         editData={editData}
         setEditData={setEditData}
+        handleSaveProfileAfterProjectupdate={
+          handleSaveProfileAfterProjectupdate
+        }
       />
 
       <Modal
