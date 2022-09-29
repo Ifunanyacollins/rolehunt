@@ -1,14 +1,13 @@
 import {
-  Avatar,
   Button,
   Typography,
   notification,
   Modal,
   Form,
   Upload,
+  Tooltip,
 } from "antd";
-import { AmplifyS3Image } from "@aws-amplify/ui-react/legacy";
-import { useEffect, useReducer, useState, useRef } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { initialState, reducer } from "../../components/profile/ProfileReudcer";
 import { ProfileAction } from "../../components/profile/types";
 import {
@@ -33,11 +32,6 @@ export interface DataType {
   poster: string;
 }
 
-type fileType = {
-  name: string;
-  file: { name: string };
-};
-
 function ProfilePage(props: any) {
   const [saving, setSaving] = useState(false);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -46,7 +40,7 @@ function ProfilePage(props: any) {
   const [currentProfile, setCurrentProfile] = useState<Profile>();
   const [uploading, setUploading] = useState(false);
   const [openUploader, setUploader] = useState(false);
-
+  const [copied, setCopied] = useState(false);
   const handleChange = (args: ProfileAction) => {
     dispatch({ type: args.type, payload: args.payload });
   };
@@ -84,10 +78,13 @@ function ProfilePage(props: any) {
   const handleSaveProfile = async (value: Omit<Profile, "id">) => {
     try {
       setSaving(true);
-
-      currentProfile
-        ? await DataUpdate({ ...value, userID: props.user.attributes.sub })
-        : await DataSave({ ...value, userID: props.user.attributes.sub });
+      const payload = {
+        ...value,
+        name: `${props.user.attributes["custom:firstName"]} ${props.user.attributes["custom:lastName"]}`,
+        email: props.user.attributes.email,
+        userID: props.user.attributes.sub,
+      };
+      currentProfile ? await DataUpdate(payload) : await DataSave(payload);
       setSaving(false);
 
       notification.open({
@@ -101,11 +98,19 @@ function ProfilePage(props: any) {
     }
   };
 
+  const handleCopy = (url: string) => {
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    });
+  };
+
   useEffect(() => {
     const subscription = DataStore.observeQuery(Project).subscribe(
       ({ items }) => {
         handleChange({ type: "SET_PORTFOLIO", payload: items });
-        console.log(items);
       }
     );
 
@@ -116,7 +121,7 @@ function ProfilePage(props: any) {
     DataStore.query(Profile).then((items) => {
       if (items.length) {
         setCurrentProfile(items[0]);
-        console.log(items);
+
         handleChange({
           type: "SET_STORE",
           payload: {
@@ -132,7 +137,7 @@ function ProfilePage(props: any) {
   return (
     <section>
       <div className="h-12  flex justify-end items-center space-x-4">
-        <Button type="dashed">Preview</Button>
+        {/* <Button type="dashed">Preview</Button> */}
         <Button
           loading={saving}
           onClick={() => handleSaveProfile(state)}
@@ -173,10 +178,19 @@ function ProfilePage(props: any) {
         >
           {state.summary}
         </Paragraph>
-        <Button type="link">
-          Copy Profile link
-          <CopyFilled />
-        </Button>
+        <Tooltip title="Copied" open={copied}>
+          <Button
+            onClick={() =>
+              handleCopy(
+                `${process.env.REACT_APP_BASE_URL}/profile/${currentProfile?.id}`
+              )
+            }
+            type="link"
+          >
+            Copy Profile link
+            <CopyFilled />
+          </Button>
+        </Tooltip>
       </div>
       <div className="my-20 border border-gray-500">
         <Title level={5}>Projects</Title>
@@ -200,7 +214,12 @@ function ProfilePage(props: any) {
               <div className="absolute backdrop-brightness-50 text-white z-10 bottom-0 p-3 w-full  justify-between group-hover:flex hidden">
                 <span className="capitalize text-base">{project.name}</span>
                 <div className="space-x-3">
-                  <a href={project.url} target="_blank" className="text-white">
+                  <a
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white"
+                  >
                     <LinkOutlined className="text-xl" />
                   </a>
                   <EditOutlined

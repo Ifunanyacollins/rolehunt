@@ -85,6 +85,7 @@ function AddProject({
       url: editData?.url,
       caseStudie: editData?.caseStudie,
     });
+    // eslint-disable-next-line
   }, [editData]);
   return (
     <Drawer onClose={onClose} open={visible}>

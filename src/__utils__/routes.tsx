@@ -8,6 +8,7 @@ const routesTitle: { [key: string]: string } = {
   "/integrations": "Integrations",
   "/developers": "Developers",
   "/applications": "Applications",
+  "/report": "Report",
 };
 
 export default routesTitle;

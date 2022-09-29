@@ -66,6 +66,8 @@ export declare class Profile {
   readonly summary: string;
   readonly avatar: string;
   readonly userID?: string | null;
+  readonly email?: string | null;
+  readonly name?: string | null;
   readonly projects?: ProjectType[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

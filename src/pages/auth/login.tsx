@@ -22,7 +22,7 @@ const Login = () => {
       setError(null);
       setLoading(true);
       await DataStore.clear();
-      const user = await Auth.signIn(values.username, values.password);
+      await Auth.signIn(values.username, values.password);
       setLoading(false);
       navigate(`/`);
     } catch (error) {

@@ -65,5 +65,7 @@ type Profile
   summary: String!
   avatar: String!
   userID: String
+  email: String
+  name: String
   projects: [ProjectType!]
 }

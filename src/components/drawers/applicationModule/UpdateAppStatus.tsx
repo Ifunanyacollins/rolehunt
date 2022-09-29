@@ -4,7 +4,6 @@ import { DataStore } from "aws-amplify";
 import { useState } from "react";
 import { Application } from "../../../models/index.js";
 import { getErrorMessage } from "../../../__utils__/getErrorMessage";
-import { DataType } from "../../table/applicationModule/ApplicationTable";
 const { Option } = Select;
 
 function UpdateAppStatus({

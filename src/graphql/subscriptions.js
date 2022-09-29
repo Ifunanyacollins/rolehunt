@@ -114,6 +114,8 @@ export const onCreateProfile = /* GraphQL */ `
       summary
       avatar
       userID
+      email
+      name
       projects {
         id
         name
@@ -145,6 +147,8 @@ export const onUpdateProfile = /* GraphQL */ `
       summary
       avatar
       userID
+      email
+      name
       projects {
         id
         name
@@ -176,6 +180,8 @@ export const onDeleteProfile = /* GraphQL */ `
       summary
       avatar
       userID
+      email
+      name
       projects {
         id
         name

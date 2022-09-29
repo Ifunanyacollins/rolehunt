@@ -30,7 +30,11 @@ function OverWiew() {
             href="https://grow.google/certificates/interview-warmup/"
           >
             <div className={`aspect-square ${boardClasses} `}>
-              <img src={arrow} className="w-44 h-44  m-auto block mt-4" />
+              <img
+                src={arrow}
+                className="w-44 h-44  m-auto block mt-4"
+                alt="Arrow"
+              />
 
               <Title className="text-center" level={5}>
                 Warmup by Google
@@ -46,7 +50,11 @@ function OverWiew() {
             href="https://www.youtube.com/c/Indeed"
           >
             <div className={`aspect-square ${boardClasses} `}>
-              <img src={camera} className="w-44 h-44 m-auto block mt-4" />
+              <img
+                src={camera}
+                className="w-44 h-44 m-auto block mt-4"
+                alt="overview"
+              />
               <Title className="text-center" level={5}>
                 Scenarios by Indeed
               </Title>
@@ -62,7 +70,11 @@ function OverWiew() {
             href="https://www.youtube.com/c/Indeed"
           >
             <div className={`aspect-square ${boardClasses} `}>
-              <img src={download} className="w-44 h-44 m-auto block mt-4" />
+              <img
+                src={download}
+                className="w-44 h-44 m-auto block mt-4"
+                alt="download"
+              />
               <Title className="text-center" level={5}>
                 Resources by Ulo
               </Title>
@@ -131,7 +143,7 @@ function OverWiew() {
             </div>
           </a>
 
-          <a rel="noreferrer" target="_blank" href="#">
+          <a rel="noreferrer" target="_blank" href="#none">
             <div className=" h-20 border border-solid border-gray-300 rounded flex items-center px-2 space-x-5 overflow-hidden">
               <Avatar icon={<PaperIcon />} />
               <div>

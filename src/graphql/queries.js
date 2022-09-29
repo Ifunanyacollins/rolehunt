@@ -158,6 +158,8 @@ export const getProfile = /* GraphQL */ `
       summary
       avatar
       userID
+      email
+      name
       projects {
         id
         name
@@ -194,6 +196,8 @@ export const listProfiles = /* GraphQL */ `
         summary
         avatar
         userID
+        email
+        name
         projects {
           id
           name
@@ -239,6 +243,8 @@ export const syncProfiles = /* GraphQL */ `
         summary
         avatar
         userID
+        email
+        name
         projects {
           id
           name

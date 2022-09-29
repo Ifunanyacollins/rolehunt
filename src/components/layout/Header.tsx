@@ -1,7 +1,7 @@
 import { Avatar, Dropdown, Menu, notification, Space } from "antd";
 import { useLocation, useNavigate } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
-import { BellIcon, SearchIcon } from "../icon";
+import { BellIcon } from "../icon";
 import routesTitle from "../../__utils__/routes";
 import type { MenuProps } from "antd";
 import { Auth, DataStore } from "aws-amplify";
@@ -43,9 +43,6 @@ function Header({ user }: { user: any }) {
         <h1 className="font-bold text-2xl mb-0">
           {routesTitle[location.pathname]}
         </h1>
-        <span className="font-sans text-[#7C8DB5] block text-base">
-          Generate reports and monitor metrics.
-        </span>
       </div>
 
       <div className="space-x-8 flex items-center">

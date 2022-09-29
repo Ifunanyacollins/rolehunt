@@ -19,7 +19,7 @@ function withAuthenticator<T>(WrappedComponent: React.ComponentType<T>) {
           setUser(null);
           setIsLoaded(true);
         });
-    }, [Auth.currentSession]);
+    }, []);
 
     if (user === null && isLoaded === true)
       return <Navigate to="/auth/login" />;

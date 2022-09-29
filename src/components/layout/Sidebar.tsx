@@ -32,7 +32,7 @@ const items: MenuProps["items"] = [
 
   {
     label: "Reporting",
-    key: "/reporting",
+    key: "/report",
     icon: <ChartIcon />,
   },
 
@@ -52,7 +52,7 @@ function Sidebar() {
   };
   return (
     <Menu
-      className="text-[#7C8DB5]"
+      className="text-[#7C8DB5] h-full py-8"
       onClick={onClick}
       selectedKeys={[current]}
       mode="inline"

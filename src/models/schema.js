@@ -226,6 +226,20 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "email": {
+                    "name": "email",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "projects": {
                     "name": "projects",
                     "isArray": true,
@@ -391,5 +405,5 @@ export const schema = {
             }
         }
     },
-    "version": "8d875c0835d89e94a15ecf7ac56b19f8"
+    "version": "f5bb52b862132263a72b856af5ee7f10"
 };
