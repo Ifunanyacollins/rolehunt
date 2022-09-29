@@ -1,6 +1,6 @@
 import { Row, Col, Button, Checkbox, Form, Input, Alert } from "antd";
 import { Auth, DataStore } from "aws-amplify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 type valuesParams = {
@@ -21,7 +21,6 @@ const Login = () => {
     try {
       setError(null);
       setLoading(true);
-      await DataStore.clear();
       await Auth.signIn(values.username, values.password);
       setLoading(false);
       navigate(`/`);
@@ -40,6 +39,9 @@ const Login = () => {
     console.log("Failed:", errorInfo);
   };
 
+  useEffect(() => {
+    DataStore.clear();
+  }, []);
   return (
     <Row>
       <Col
